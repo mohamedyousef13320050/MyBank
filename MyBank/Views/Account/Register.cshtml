@@ -1,0 +1,168 @@
+@model BankSystem.ViewModel.RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Bank System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .register-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            border: 1px solid #dde3ef;
+        }
+        .bank-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f2d6e;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-control {
+            border: 1.5px solid #dde3ef;
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.95rem;
+            color: #1a2340;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .form-control:focus {
+            border-color: #1a56db;
+            box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+            outline: none;
+        }
+        .btn-register {
+            background: linear-gradient(135deg, #1a56db, #0f2d6e);
+            border: none;
+            border-radius: 8px;
+            padding: 13px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-register:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26,86,219,0.35);
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .login-link a {
+            color: #1a56db;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .login-link a:hover { text-decoration: underline; }
+        .error-box {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+        }
+        .error-box li { color: #dc2626; font-size: 0.88rem; list-style: none; }
+    </style>
+</head>
+<body>
+    <div class="register-box">
+        <div class="bank-badge">🏦 Bank System</div>
+        <h2>Create Account</h2>
+        <p class="subtitle">Fill in your details to get started</p>
+
+        <form asp-action="Register" asp-controller="Account" method="post">
+
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+            {
+                <div class="error-box">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </div>
+            }
+
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label">Username</label>
+                <input asp-for="UserName" class="form-control" placeholder="Choose a username" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <input asp-for="Email" class="form-control" placeholder="your@email.com" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control" placeholder="Min. 6 characters" />
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="ConfirmedPassword" class="form-label">Confirm Password</label>
+                <input asp-for="ConfirmedPassword" class="form-control" placeholder="Repeat your password" />
+            </div>
+
+            <button type="submit" class="btn-register">Create Account</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a asp-action="Login" asp-controller="Account">Sign In</a>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

@@ -1,0 +1,46 @@
+@model EmployeeDetailsVM
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<h2>Employee Details</h2>
+<hr />
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FullName)</dt>
+            <dd class="col-sm-9">@Model.FullName</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Email)</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.EmployeeCode)</dt>
+            <dd class="col-sm-9">@Model.EmployeeCode</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Position)</dt>
+            <dd class="col-sm-9">@Model.Position</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.HireDate)</dt>
+            <dd class="col-sm-9">@Model.HireDate.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
+            <dd class="col-sm-9">
+                @if (Model.Status)
+                {
+                    <span class="badge bg-success">Active</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inactive</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

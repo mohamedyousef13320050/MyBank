@@ -1,0 +1,236 @@
+@model BankSystem.ViewModel.LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - Bank System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        
+        .left-panel {
+            width: 45%;
+            background: linear-gradient(160deg, #0f2d6e 0%, #1a56db 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            color: #fff;
+        }
+        .bank-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .left-panel h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        .left-panel p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            max-width: 280px;
+            line-height: 1.6;
+        }
+        .feature-list {
+            margin-top: 40px;
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            max-width: 300px;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .feature-list li .dot {
+            width: 8px; height: 8px;
+            background: #38ef7d;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .login-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            border: 1px solid #dde3ef;
+        }
+        .login-box h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f2d6e;
+            margin-bottom: 6px;
+        }
+        .login-box .subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-control {
+            border: 1.5px solid #dde3ef;
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 0.95rem;
+            color: #1a2340;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .form-control:focus {
+            border-color: #1a56db;
+            box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+            outline: none;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #1a56db, #0f2d6e);
+            border: none;
+            border-radius: 8px;
+            padding: 13px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26, 86, 219, 0.35);
+        }
+        .register-link {
+            text-align: center;
+            margin-top: 22px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .register-link a {
+            color: #1a56db;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .register-link a:hover { text-decoration: underline; }
+        .error-box {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+        }
+        .error-box li { color: #dc2626; font-size: 0.88rem; margin: 0; list-style: none; }
+        .form-check-label { color: #6b7280; font-size: 0.88rem; }
+        
+        @@media (max-width: 768px) {
+            .left-panel { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left decorative panel -->
+    <div class="left-panel">
+        <div class="bank-icon">🏦</div>
+        <h1>Bank System</h1>
+        <p>Your trusted partner for secure and reliable banking services.</p>
+        <ul class="feature-list">
+            <li><span class="dot"></span> Secure Account Management</li>
+            <li><span class="dot"></span> Real-time Transactions</li>
+            <li><span class="dot"></span> Instant Fund Transfers</li>
+            <li><span class="dot"></span> 24/7 Online Access</li>
+        </ul>
+    </div>
+
+    <!-- Right login panel -->
+    <div class="right-panel">
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to your account to continue</p>
+
+            <form asp-action="Login" asp-controller="Account" method="post">
+
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div class="error-box">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label">Username</label>
+                    <input asp-for="UserName" class="form-control" placeholder="Enter your username" autocomplete="username" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" placeholder="Enter your password" autocomplete="current-password" />
+                </div>
+
+                <div class="mb-4 d-flex align-items-center gap-2">
+                    <input asp-for="RememberMe" class="form-check-input mt-0" style="width:16px;height:16px;cursor:pointer;" />
+                    <label asp-for="RememberMe" class="form-check-label">Remember me</label>
+                </div>
+
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+
+            <div class="register-link">
+                Don't have an account? <a asp-action="Register" asp-controller="Account">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

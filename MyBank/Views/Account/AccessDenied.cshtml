@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Access Denied";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Denied - Bank System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .denied-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .icon { font-size: 70px; margin-bottom: 20px; }
+        h2 { color: #ff6b7a; font-weight: 700; margin-bottom: 10px; }
+        p { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 30px; }
+        .btn-back {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.5);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="denied-card">
+        <div class="icon">🚫</div>
+        <h2>Access Denied</h2>
+        <p>You do not have permission to access this page. Please contact your administrator if you believe this is a mistake.</p>
+        <a asp-controller="Account" asp-action="Logout" class="btn-back">← Back to Login</a>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #0f2d6e 0%, #1a56db 100%);
+        border-radius: 14px;
+        padding: 28px 32px;
+        margin-bottom: 30px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .dashboard-header h2 {
+        border: none;
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-size: 1.8rem;
+    }
+    .dashboard-header p {
+        margin: 4px 0 0;
+        opacity: 0.75;
+        font-size: 0.95rem;
+    }
+    .header-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+    }
+
+    .stat-card {
+        background: white;
+        border: 1px solid #dde3ef;
+        border-radius: 12px;
+        padding: 22px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.2s;
+    }
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .stat-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+    .stat-icon.blue   { background: #eff6ff; }
+    .stat-icon.green  { background: #f0fdf4; }
+    .stat-icon.purple { background: #f5f3ff; }
+    .stat-icon.orange { background: #fff7ed; }
+    .stat-number { font-size: 1.6rem; font-weight: 800; color: #0f2d6e; line-height: 1; }
+    .stat-label  { font-size: 0.82rem; color: #6b7280; font-weight: 500; margin-top: 3px; }
+
+    .action-card {
+        background: white;
+        border: 1px solid #dde3ef;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.25s;
+        text-decoration: none;
+        display: block;
+        color: inherit;
+    }
+    .action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        border-color: #1a56db;
+        color: inherit;
+    }
+    .action-card-top {
+        padding: 24px 20px 16px;
+    }
+    .action-card-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 14px;
+    }
+    .action-card h5 {
+        font-weight: 700;
+        color: #0f2d6e;
+        margin-bottom: 4px;
+        font-size: 1rem;
+    }
+    .action-card p {
+        color: #6b7280;
+        font-size: 0.85rem;
+        margin: 0;
+    }
+    .action-card-footer {
+        padding: 12px 20px;
+        border-top: 1px solid #f3f4f6;
+        background: #fafbfc;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .action-card-footer .arrow { font-size: 1rem; }
+
+    .section-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 14px;
+        border: none;
+        padding: 0;
+    }
+</style>
+
+<!-- Dashboard Header -->
+<div class="dashboard-header">
+    <div>
+        <h2>Admin Dashboard</h2>
+        <p>Welcome back! Here's an overview of your bank system.</p>
+    </div>
+    <div class="header-icon">🏦</div>
+</div>
+
+<!-- Stats Row -->
+<div class="row mb-3">
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon blue">👥</div>
+            <div>
+                <div class="stat-number" id="empCount">—</div>
+                <div class="stat-label">Employees</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon green">🏛️</div>
+            <div>
+                <div class="stat-number" id="branchCount">—</div>
+                <div class="stat-label">Branches</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon purple">🧾</div>
+            <div>
+                <div class="stat-number" id="accCount">—</div>
+                <div class="stat-label">Accounts</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon orange">💳</div>
+            <div>
+                <div class="stat-number" id="txCount">—</div>
+                <div class="stat-label">Transactions</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Cards -->
+<h6 class="section-title">Quick Access</h6>
+<div class="row">
+    <div class="col-md-3">
+        <a asp-controller="Employee" asp-action="Index" class="action-card">
+            <div class="action-card-top">
+                <div class="action-card-icon" style="background:#eff6ff;">👤</div>
+                <h5>Employees</h5>
+                <p>Manage bank staff, create and deactivate employee accounts.</p>
+            </div>
+            <div class="action-card-footer" style="color:#1a56db;">
+                <span>Manage Employees</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Branch" asp-action="Index" class="action-card">
+            <div class="action-card-top">
+                <div class="action-card-icon" style="background:#f0fdf4;">🏛️</div>
+                <h5>Branches</h5>
+                <p>Add and manage all bank branch locations and their status.</p>
+            </div>
+            <div class="action-card-footer" style="color:#059669;">
+                <span>Manage Branches</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Customer" asp-action="Index" class="action-card">
+            <div class="action-card-top">
+                <div class="action-card-icon" style="background:#f5f3ff;">🧑‍💼</div>
+                <h5>Customers</h5>
+                <p>View all registered customers and their account information.</p>
+            </div>
+            <div class="action-card-footer" style="color:#7c3aed;">
+                <span>View Customers</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a asp-controller="Report" asp-action="Index" class="action-card">
+            <div class="action-card-top">
+                <div class="action-card-icon" style="background:#fff7ed;">📊</div>
+                <h5>Reports</h5>
+                <p>View financial reports, total balances, and transaction summaries.</p>
+            </div>
+            <div class="action-card-footer" style="color:#d97706;">
+                <span>View Reports</span>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // Load live stats from Reports endpoint
+    fetch('/Report/Stats')
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('empCount').textContent   = data.employees   ?? '—';
+            document.getElementById('branchCount').textContent = data.branches   ?? '—';
+            document.getElementById('accCount').textContent   = data.accounts    ?? '—';
+            document.getElementById('txCount').textContent    = data.transactions ?? '—';
+        })
+        .catch(() => {
+            // fallback – just hide dashes
+        });
+</script>
+}
