@@ -1,0 +1,72 @@
+@model IEnumerable<BankSystem.ViewModel.AccountListVM>
+
+@{
+    ViewData["Title"] = "Customer Accounts";
+}
+
+<h2>Customer Accounts</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Open New Account</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Account Number</th>
+            <th>Customer Name</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AccountNumber</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Balance.ToString("C")</td>
+                <td>
+                    @switch (item.Status)
+                    {
+                        case BankSystem.Models.AccountStatus.Active:
+                            <span class="badge bg-success">Active</span>
+                            break;
+                        case BankSystem.Models.AccountStatus.Blocked:
+                            <span class="badge bg-warning text-dark">Blocked</span>
+                            break;
+                        case BankSystem.Models.AccountStatus.Closed:
+                            <span class="badge bg-danger">Closed</span>
+                            break;
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Details</a>
+                    
+                    @if (item.Status == BankSystem.Models.AccountStatus.Active)
+                    {
+                        <form asp-action="ChangeStatus" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <input type="hidden" name="status" value="@BankSystem.Models.AccountStatus.Blocked" />
+                            <button type="submit" class="btn btn-sm btn-warning">Block</button>
+                        </form>
+                    }
+                    else if (item.Status == BankSystem.Models.AccountStatus.Blocked)
+                    {
+                        <form asp-action="ChangeStatus" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <input type="hidden" name="status" value="@BankSystem.Models.AccountStatus.Active" />
+                            <button type="submit" class="btn btn-sm btn-success">Activate</button>
+                        </form>
+                    }
+                    
+                    @if (item.Status != BankSystem.Models.AccountStatus.Closed)
+                    {
+                        <form asp-action="ChangeStatus" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to close this account? This action cannot be undone easily.');">
+                            <input type="hidden" name="status" value="@BankSystem.Models.AccountStatus.Closed" />
+                            <button type="submit" class="btn btn-sm btn-danger">Close</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

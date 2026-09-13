@@ -1,0 +1,56 @@
+@model BankSystem.ViewModel.AccountDetailsVM
+
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mt-4 shadow-sm border-0">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0">Account Information</h5>
+                <div>
+                    @switch (Model.Status)
+                    {
+                        case BankSystem.Models.AccountStatus.Active:
+                            <span class="badge bg-light text-success fs-6">Active</span>
+                            break;
+                        case BankSystem.Models.AccountStatus.Blocked:
+                            <span class="badge bg-warning text-dark fs-6">Blocked</span>
+                            break;
+                        case BankSystem.Models.AccountStatus.Closed:
+                            <span class="badge bg-danger fs-6">Closed</span>
+                            break;
+                    }
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="row mb-4 text-center">
+                    <div class="col-12">
+                        <h6 class="text-muted text-uppercase fw-bold">Available Balance</h6>
+                        <h1 class="text-success display-4 fw-bold">@Model.Balance.ToString("C")</h1>
+                    </div>
+                </div>
+                
+                <hr />
+                
+                <div class="row mt-4">
+                    <div class="col-sm-4 text-muted fw-bold">Account Number</div>
+                    <div class="col-sm-8 fs-5">@Model.AccountNumber</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-4 text-muted fw-bold">Account Holder</div>
+                    <div class="col-sm-8 fs-5">@Model.CustomerName</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-4 text-muted fw-bold">Opened On</div>
+                    <div class="col-sm-8 fs-5">@Model.CreatedAt.ToString("MMMM dd, yyyy")</div>
+                </div>
+            </div>
+            <div class="card-footer bg-light p-3 d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Back to My Accounts</a>
+                <a asp-controller="CustomerTransaction" asp-action="History" asp-route-accountId="@Model.Id" class="btn btn-primary">View Transaction History</a>
+            </div>
+        </div>
+    </div>
+</div>

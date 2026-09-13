@@ -1,0 +1,65 @@
+@model BankSystem.ViewModel.TransactionHistoryVM
+
+@{
+    ViewData["Title"] = "Transaction History";
+}
+
+<div class="card mt-4 shadow-sm border-0">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Transaction History - Account: @Model.AccountNumber</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info mb-4 fs-5 text-center">
+            <strong>Current Balance: </strong> @Model.CurrentBalance.ToString("C")
+        </div>
+
+        @if (!Model.Transactions.Any())
+        {
+            <p class="text-center text-muted">No transactions found for this account.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Transactions)
+                        {
+                            <tr>
+                                <td>@item.Date.ToString("g")</td>
+                                <td>
+                                    @switch (item.Type)
+                                    {
+                                        case BankSystem.Models.TransactionType.Deposit:
+                                            <span class="badge bg-success"><i class="bi bi-arrow-down-circle"></i> Deposit</span>
+                                            break;
+                                        case BankSystem.Models.TransactionType.Withdraw:
+                                            <span class="badge bg-danger"><i class="bi bi-arrow-up-circle"></i> Withdraw</span>
+                                            break;
+                                        case BankSystem.Models.TransactionType.Transfer:
+                                            <span class="badge bg-info text-dark"><i class="bi bi-arrow-left-right"></i> Transfer</span>
+                                            break;
+                                    }
+                                </td>
+                                <td class="fw-bold @(item.Type == BankSystem.Models.TransactionType.Deposit ? "text-success" : "text-danger")">
+                                    @(item.Type == BankSystem.Models.TransactionType.Deposit ? "+" : "-")@item.Amount.ToString("C")
+                                </td>
+                                <td>@item.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    <div class="card-footer bg-light p-3">
+        <a asp-controller="CustomerAccount" asp-action="Index" class="btn btn-secondary">Back to My Accounts</a>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@model IEnumerable<BankSystem.ViewModel.AccountListVM>
+
+@{
+    ViewData["Title"] = "My Accounts";
+}
+
+<h2 class="mb-4">My Accounts</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You do not have any accounts yet. Please contact your branch to open an account.
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <strong>Acc: @item.AccountNumber</strong>
+                        @switch (item.Status)
+                        {
+                            case BankSystem.Models.AccountStatus.Active:
+                                <span class="badge bg-light text-success">Active</span>
+                                break;
+                            case BankSystem.Models.AccountStatus.Blocked:
+                                <span class="badge bg-warning text-dark">Blocked</span>
+                                break;
+                            case BankSystem.Models.AccountStatus.Closed:
+                                <span class="badge bg-danger">Closed</span>
+                                break;
+                        }
+                    </div>
+                    <div class="card-body text-center py-4">
+                        <h6 class="text-muted mb-2">Current Balance</h6>
+                        <h3 class="text-success mb-0">@item.Balance.ToString("C")</h3>
+                    </div>
+                    <div class="card-footer bg-transparent text-center border-top-0 pt-0 pb-3">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

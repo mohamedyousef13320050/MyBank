@@ -1,0 +1,40 @@
+@model BankSystem.ViewModel.AccountDetailsVM
+
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<div class="card mt-4 shadow-sm">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Account Details: @Model.AccountNumber</h4>
+        <div>
+            @switch (Model.Status)
+            {
+                case BankSystem.Models.AccountStatus.Active:
+                    <span class="badge bg-success fs-6">Active</span>
+                    break;
+                case BankSystem.Models.AccountStatus.Blocked:
+                    <span class="badge bg-warning text-dark fs-6">Blocked</span>
+                    break;
+                case BankSystem.Models.AccountStatus.Closed:
+                    <span class="badge bg-danger fs-6">Closed</span>
+                    break;
+            }
+        </div>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Customer Name</dt>
+            <dd class="col-sm-9">@Model.CustomerName</dd>
+
+            <dt class="col-sm-3">Balance</dt>
+            <dd class="col-sm-9">@Model.Balance.ToString("C")</dd>
+
+            <dt class="col-sm-3">Created At</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("g")</dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-light">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
