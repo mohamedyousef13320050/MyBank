@@ -58,12 +58,5 @@ namespace BankSystem.Controllers
             }
             return View(model);
         }
-
-        public IActionResult Details(int id)
-        {
-            var vm = transactionBL.GetTransactionDetails(id);
-            if (vm == null) return NotFound();
-            return View(vm);
-        }
     }
 }

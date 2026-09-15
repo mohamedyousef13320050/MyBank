@@ -53,7 +53,7 @@ builder.Services.AddScoped<ICustomerBL, CustomerBL>();
 builder.Services.AddScoped<IBranchBL, BranchBL>();
 builder.Services.AddScoped<IAccountBL, AccountBL>();
 builder.Services.AddScoped<ITransactionBL, TransactionBL>();
-//builder.Services.AddScoped<IReportBL, ReportBL>();
+builder.Services.AddScoped<IReportBL, ReportBL>();
 
 // Add MVC
 builder.Services.AddControllersWithViews();

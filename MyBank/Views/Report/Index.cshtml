@@ -1,0 +1,79 @@
+@model BankSystem.ViewModel.AdminReportVM
+
+@{
+    ViewData["Title"] = "Bank Reports";
+}
+
+<h2 class="mb-4">Bank Statistics Dashboard</h2>
+
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase text-light">Total Customers</h6>
+                <h2 class="display-5 fw-bold">@Model.TotalCustomers</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white h-100">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase text-light">Total Employees</h6>
+                <h2 class="display-5 fw-bold">@Model.TotalEmployees</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-secondary text-white h-100">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase text-light">Total Accounts</h6>
+                <h2 class="display-5 fw-bold">@Model.TotalAccounts</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card bg-dark text-white h-100">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase text-light">Total Transactions</h6>
+                <h2 class="display-5 fw-bold">@Model.TotalTransactions</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="card border-success h-100 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Bank Financial Status</h5>
+            </div>
+            <div class="card-body p-4 text-center">
+                <h6 class="text-muted text-uppercase mb-2">Total Holdings (All Accounts)</h6>
+                <h1 class="text-success display-4 fw-bold">@Model.TotalBalance.ToString("C")</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card border-secondary h-100 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Movement Volume</h5>
+            </div>
+            <div class="card-body p-4">
+                <ul class="list-group list-group-flush fs-5">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Deposits
+                        <span class="text-success fw-bold">@Model.TotalDeposits.ToString("C")</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Withdrawals
+                        <span class="text-danger fw-bold">@Model.TotalWithdrawals.ToString("C")</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Transfers Vol.
+                        <span class="text-primary fw-bold">@Model.TotalTransfers.ToString("C")</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
