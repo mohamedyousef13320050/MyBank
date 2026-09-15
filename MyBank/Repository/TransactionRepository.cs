@@ -20,6 +20,14 @@ namespace BankSystem.Repository
                 .ToList();
         }
 
+        public Transaction? GetById(int id)
+        {
+            return context.Transactions
+                .Include(t => t.Account)
+                .ThenInclude(a => a.Customer)
+                .FirstOrDefault(t => t.Id == id);
+        }
+
         public void Add(Transaction transaction)
         {
             context.Transactions.Add(transaction);

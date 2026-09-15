@@ -118,6 +118,23 @@ namespace BankSystem.BL
             return vm;
         }
 
+        public TransactionDetailsVM? GetTransactionDetails(int id)
+        {
+            var t = transactionRepository.GetById(id);
+            if (t == null) return null;
+
+            return new TransactionDetailsVM
+            {
+                Id = t.Id,
+                AccountNumber = t.Account.AccountNumber,
+                CustomerName = t.Account.Customer.FullName,
+                Amount = t.Amount,
+                Type = t.Type,
+                Date = t.Date,
+                Description = t.Description
+            };
+        }
+
         public (bool Success, string Message) ProcessTransfer(string userId, TransferVM model)
         {
             var customer = customerRepository.GetByUserId(userId);
