@@ -7,7 +7,6 @@ namespace BankSystem.BL
         (bool Success, string Message) ProcessDeposit(DepositVM model);
         (bool Success, string Message) ProcessWithdraw(WithdrawVM model);
         TransactionHistoryVM? GetCustomerTransactions(string userId, int accountId);
-        TransactionDetailsVM? GetTransactionDetails(int id);
         (bool Success, string Message) ProcessTransfer(string userId, TransferVM model);
     }
 }

@@ -65,7 +65,7 @@ namespace BankSystem.BL
             var account = new Account
             {
                 AccountNumber = accountNum,
-                Balance = model.InitialBalance, // DB constraint ensures >= 0
+                Balance = model.InitialBalance, 
                 CustomerId = model.CustomerId,
                 CreatedAt = DateTime.Now,
                 Status = AccountStatus.Active
