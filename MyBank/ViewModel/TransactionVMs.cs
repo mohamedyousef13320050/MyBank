@@ -49,6 +49,17 @@ namespace BankSystem.ViewModel
         public string Description { get; set; } = string.Empty;
     }
 
+    public class TransactionDetailsVM
+    {
+        public int Id { get; set; }
+        public string AccountNumber { get; set; } = string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
+        public decimal Amount { get; set; }
+        public TransactionType Type { get; set; }
+        public DateTime Date { get; set; }
+        public string Description { get; set; } = string.Empty;
+    }
+
     public class TransferVM
     {
         [Required]

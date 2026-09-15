@@ -42,17 +42,17 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 // Register Repository
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-//builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-//builder.Services.AddScoped<IBranchRepository, BranchRepository>();
-//builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-//builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 // Register Business Logic
 builder.Services.AddScoped<IEmployeeBL, EmployeeBL>();
-//builder.Services.AddScoped<ICustomerBL, CustomerBL>();
-//builder.Services.AddScoped<IBranchBL, BranchBL>();
-//builder.Services.AddScoped<IAccountBL, AccountBL>();
-//builder.Services.AddScoped<ITransactionBL, TransactionBL>();
+builder.Services.AddScoped<ICustomerBL, CustomerBL>();
+builder.Services.AddScoped<IBranchBL, BranchBL>();
+builder.Services.AddScoped<IAccountBL, AccountBL>();
+builder.Services.AddScoped<ITransactionBL, TransactionBL>();
 //builder.Services.AddScoped<IReportBL, ReportBL>();
 
 // Add MVC
